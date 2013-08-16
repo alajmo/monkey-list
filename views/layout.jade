@@ -1,0 +1,30 @@
+doctype 5
+html
+  head
+    title= title
+    //link(rel="stylesheet", href='http://code.jquery.com/ui/1.10.3/themes/black-tie/jquery-ui.css', media="all", type='text/javascript')
+    link(rel='stylesheet', href='/stylesheets/smoothness.css')
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    script(src='http://code.jquery.com/jquery-latest.min.js', type='text/javascript')
+    script(src="/javascripts/jquery.cookie.js")
+    script(src="/javascripts/jquery.tinysort.min.js")
+    script(src='http://code.jquery.com/ui/1.10.3/jquery-ui.min.js', type='text/javascript')
+    script(src='/javascripts/jquery-ui-timepicker-addon.js', type='text/javascript')
+    script(src='/javascripts/main.js', type='text/javascript')
+    script(src='/javascripts/cookies.js', type='text/javascript')
+    
+
+    script.
+      $(document).ready(function(){
+        $("#publishBtn").click(function() {
+          $('.todoList').submit();
+        });
+      });
+
+  body
+    include includes/header
+    block content
+    include includes/footer
+
+
+

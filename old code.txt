@@ -1,0 +1,67 @@
+//app.get('/:lid/edit/:tid', routes.edit);
+//app.post('/update/:tid', routes.update);
+
+
+exports.update = function(req, res) {
+    List.update(
+            {_id: req.body.lid,
+                'todos._id': req.params.tid
+            },
+            {$set: {'todos.$.content': req.body.content}},
+            function(err, tlist) {
+                if (err) {
+                    console.log(err);
+                }
+                res.redirect('/' + req.body.lid);
+            }
+    );
+};
+
+
+
+exports.edit = function(req, res) {
+
+    List.findOne({'_id': req.params.lid}, function(err, tlist) {
+        res.render('edit', {
+            lid: tlist.id,
+            current: req.params.tid,
+            todos: tlist.todos
+        });
+    });
+};
+
+
+
+function randd() {
+//        div.todoList
+//              div.entry
+//            a(href='/#{lid}/edit/' + todo._id, title='Update this todo item') #{todo.content}
+//          div.delete
+//            a(href='/#{lid}/destroy/' + todo._id, title='Delete this todo item') D
+
+}
+;
+
+
+
+
+
+
+
+
+//    new List().save(function(err, tlist) {
+//        for (var todo in num) {
+//            new Todo({
+//                content: todos_obj.content[todo],
+//                comment: todos_obj.comment[todo],
+//                deadline: todos_obj.deadline[todo],
+//                order: todo
+//            }).save(function(err, tod) {
+//                List.update({_id: tlist.id},
+//                        {$push: {todos: tod}}, {upsert: true}, function(err, todos) {
+//                });
+//            });
+//        }
+//        ;
+//        res.redirect('/' + tlist.id);
+//    });

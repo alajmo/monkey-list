@@ -1,0 +1,75 @@
+extends layout
+
+block content
+  section    
+    div.new-todo-wrapper
+      form(name='saved', id="new-form", method="post", accept-charset='utf-8' )
+        input(name='content',  class='new-input', autofocus="autofocus")
+        input(type='hidden', name='lid', value='#{lid}')
+    form(name='saved-form', method='post', class='todoList', accept-charset='utf-8')
+      each todo in todos
+        div.todo-wrapper(id="#{todo.order}", class="#{todo._id}")
+          if(todo.status=='unfinished')
+            textarea(onchange="updateTodo('#{lid}', '#{todo._id}', value, name);", name="content", class="entryText", accept-charset="utf-8") #{todo.content}
+          else
+            textarea(onchange="updateTodo('#{lid}', '#{todo._id}', value, name);", name="content", class="entryText todoFinished", accept-charset="utf-8") #{todo.content}
+          textarea(onchange="updateTodo('#{lid}', '#{todo._id}', value, name);", name="comment", class="commentText", accept-charset="utf-8") #{todo.comment}
+          input(type="text", onchange="updateTodo('#{lid}', '#{todo._id}', value, name);", name="deadline", class="deadlineText widget", value="#{todo.deadline}", accept-charset="utf-8")
+          .deadlineHelper
+          .tool-box
+            .statusBtn(onclick='updateStatus("#{lid}", "#{todo._id}", "#{todo.status}");')
+            .commentBtn
+            .deadlineBtn
+            .deleteBtn(onclick="deleteTodo('#{lid}', '#{todo._id}');")
+          
+  script.
+    $(document).ready(function(){    
+      setupTodo();
+      $(".todoList > div").tsort({order: "asc", attr:"id"});
+      var tids = [];
+      var old_position = 0;
+      var new_position = 0;
+      $(".todoList").sortable({ 
+     start : function(){
+            old_position = $(".todoList").sortable("toArray");
+        },
+      update : function(){
+            new_position = $(".todoList").sortable("toArray");
+            var tidss = [];
+            $(".todo-wrapper").each(function(){
+              tidss.push($(this).attr("class").split(" ")[1]);
+            });
+            //$.each(tidss, function(i, el){
+            //    if($.inArray(el, tids) === -1) tids.push(el);
+            //});
+            updateOrder("#{lid}", tidss, old_position, new_position);
+        }
+      });
+      $(".todoList").disableSelection();
+
+      $("#new-form").submit(function(event){
+        event.preventDefault();
+        var obj = $(this).serializeObject();
+        //var order = 1 + parseInt($(".todo-wrapper").last().attr("id"));
+        //var tid = 1 + parseInt($(".todo-wrapper").last().attr("class").split(" ")[1]);
+        //alert("tid " + tid);
+        //alert("order " + order);
+
+        var order = 0;
+        var tid = 0;
+        $(".todo-wrapper").each(function(){
+            var ord = parseInt(this.id);
+            var ti = parseInt($(this).attr("class").split(" ")[1]);
+            if(ord > order){
+                order = ord;
+            }
+            if(ti > tid){
+                tid = ti;
+            }
+        });
+        order = order + 1;
+        tid = tid + 1;
+
+        createTodo(obj.lid, tid, order, obj.content);
+      });
+    });

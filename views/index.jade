@@ -1,0 +1,30 @@
+extends layout
+
+block content
+  section
+    div.new-todo-wrapper
+      form(name='main', id="new-form", method='post', accept-charset='utf-8' )
+        input(type='text', name='content', autofocus="autofocus", class='new-input')
+    form(action='/save/', name='myform2', method='post', class='todoList', id='todoListId', accept-charset='utf-8')
+
+  script.
+    $(document).ready(function(){
+      $("#publishBtn").click(function(){
+        window.onbeforeunload = null;
+      });
+      window.onbeforeunload = function() {
+        var container = document.getElementById("todoListId");
+        if (container.childNodes.length > 0){
+            return "You have modified your monkey-list, reloading the page will reset all your changes.";
+        }
+      };
+
+    $(".todoList").sortable();
+    $(".todoList").disableSelection();
+
+     $("#new-form").submit(function(event){
+        event.preventDefault();
+        var obj = $(this).serializeObject();
+        appendTodo1(obj.content);
+      });
+    });

@@ -1,0 +1,15 @@
+header
+  div.header2
+    div.logo
+      img(src="/images/logo3.png")
+
+    div.btn-wrapper
+     -if(title=='index')
+       #publishBtn.toolBtn(style="background-image: url(/images/save.png); background-repeat: no-repeat; background-position: 5px 7px;") Save
+     //.toolBtn
+       a(href="http://localhost:3000") New
+     .toolBtn(onclick="showDeadlines();", style="background-image: url(/images/time.png); background-repeat: no-repeat; background-position: 5px 5px;") Time
+     .toolBtn(onclick="showComments();", style="background-image: url(/images/note.png); background-repeat: no-repeat; background-position: 3px 5px;") Notes
+     
+
+

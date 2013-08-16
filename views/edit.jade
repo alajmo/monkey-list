@@ -1,0 +1,22 @@
+extends layout
+
+block content
+  section
+    div.new-todo-wrapper
+      form(action='/create', method='post', accept-charset='utf-8' )
+        input(type='text', name='content', class='new-input')
+        input(type='hidden', name='lid', value='#{lid}')
+    div.todoList
+      each todo in todos
+        if (todo._id == current)
+          form(action='/update/' + todo._id, method='post', accept-charset='utf-8', class='entry-wrapper')
+            input(type='text', name='content', value=todo.content)
+            input(type='hidden', name='lid', value='#{lid}')
+        else
+          div.entry-wrapper
+            div.entry
+              a(href='/#{lid}/edit/' + todo._id, title='Update this todo item') #{todo.content}
+            div.delete
+              a(href='/#{lid}/destroy/' + todo._id, title='Delete this todo item') D
+
+
