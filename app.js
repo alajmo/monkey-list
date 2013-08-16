@@ -11,7 +11,7 @@ var express = require('express')
  *  Creates the server and connect to mongodb
  */
 var app = express();
-mongoose.connect('mongodb://127.0.0.1/dothis');
+mongoose.connect('mongodb://127.0.0.1/monkey-list');
 
 /**
  * Sets the environment
