@@ -8,8 +8,6 @@ var List = mongoose.model('List');
 /**
  * Hash
  */
-var Hashids = require('hashids'),
-        hashids = new Hashids("Krivaja je u mojoj dusi", 4);
 
 exports.index = function(req, res) {
     res.render('index', {
