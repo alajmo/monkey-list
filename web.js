@@ -10,7 +10,7 @@ var express = require('express')
 /**
  *  Creates the server and connect to mongodb
  */
-var uristring = "mongodb://heroku_app17570275:nbdabcs8vebq3nh28rvhp58kh1@ds041238.mongolab.co m:41238/heroku_app17570275" || "mongodb://localhost/test";
+var uristring = "mongodb://localhost/monkey-list";
 
 var theport = process.env.PORT || 5000;
 var database = null;
