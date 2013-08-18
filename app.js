@@ -17,7 +17,7 @@ var database = null;
 var app = express();
 //mongoose.connect('mongodb://localhost/monkey-list');
 
-mongoose.connect(uristring, function(err, res) {
+mongoose.connect(uristring, function(err, db) {
     console.log("connected, db: " + db);
 
     database = db;
