@@ -5,10 +5,22 @@ block content
     div.new-todo-wrapper
       form(name='main', id="new-form", method='post', accept-charset='utf-8' )
         input(type='text', name='content', autofocus="autofocus", class='new-input')
+        .btn-wrapper
+          -if(title=='index')
+            #publishBtn.toolBtn Save
+          .toolBtn(id="timeBtn", onclick="showDeadlines();") Time
+          .toolBtn(id="notesBtn", onclick="showComments();") Notes
+
     form(action='/save/', name='myform2', method='post', class='todoList', id='todoListId', accept-charset='utf-8')
 
   script.
     $(document).ready(function(){
+      if ($.cookie("showComments") === "no") {
+        $('#notesBtn').css("color", "#9abb94");
+      }
+      if ($.cookie("showDeadlines") === "no") {
+        $('#timeBtn').css("color", "#9abb94");
+      }
       $("#publishBtn").click(function(){
         window.onbeforeunload = null;
       });
@@ -19,12 +31,21 @@ block content
         }
       };
 
-    $(".todoList").sortable();
-    $(".todoList").disableSelection();
+      $(".todoList").sortable({axis: "y",});
+      $(".todoList").disableSelection();
 
-     $("#new-form").submit(function(event){
+      $("section").resizable({
+        handles: "e"
+        });
+
+      $("#new-form").submit(function(event){
         event.preventDefault();
         var obj = $(this).serializeObject();
-        appendTodo1(obj.content);
+        if ($(".todo-wrapper").length < 30){
+          appendTodo1(obj.content);
+        }
+        else{
+        alert("Number of todo's exceeded!");
+        }
       });
     });

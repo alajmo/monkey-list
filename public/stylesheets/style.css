@@ -193,14 +193,14 @@ input {
   box-sizing: border-box;
   vertical-align: middle;
   display: block;
-  border: 2px solid #dadada;
 }
 body,
 html {
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 12px "Lucida Grande", Helvetica, Arial, sans-serif;
   margin: 0;
   padding: 0;
   height: 100%;
+  min-height: 100%;
   width: 100%;
   background: #fff;
 }
@@ -212,93 +212,62 @@ a {
 }
 header {
   position: relative;
-  top: 0;
-  left: 0;
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 42px;
-  background: #f6f6f6;
-  border-shadow: 1px #7e9eac solid;
-  border-bottom: 1px solid #cbd7db;
-}
-div.logo {
-  position: absolute;
-  left: 0;
-  top: 8px;
-  height: 100%;
-}
-div.logoText {
-  position: absolute;
-  left: 30px;
-  top: 10px;
-  height: 100%;
-  font: 1.3em arial;
-  line-height: 150%;
-  color: #93989a;
-  color: #00b6ff;
-}
-span.logoText2 {
-  font-weight: bold;
-  font: 1.2em arial;
-}
-.header2 {
-  position: relative;
   margin: 0 auto;
+  padding: 0;
   width: 50%;
   min-width: 400px;
-  height: 100%;
+  height: 62px;
+  border-shadow: 1px #7e9eac solid;
+  border-bottom: 1px solid #e5e5e5;
+}
+div.logo {
+  position: relative;
+  top: 15px;
 }
 .btn-wrapper {
   position: absolute;
-  bottom: 5px;
   right: 0;
-  height: 80%;
-  background: inherit;
+  top: 50px;
+  height: 50%;
+  bottom: 15px;
+  width: 210px;
 }
 .button,
 .toolBtn {
-  width: 65px;
+  width: 30px;
   height: 100%;
   float: right;
-  margin-left: 5px;
-  text-align: right;
-  padding-right: 5px;
-  vertical-align: middle;
-  color: #fff;
-  background: #00b7ff;
-  background: #6ec8ea;
-  background: #77d288;
-  background: #77b7d2;
-  font: 500 1em Helvetica;
-  line-height: 2.5em;
+  margin-left: 10px;
+  font: 1em Helvetica;
   border: none;
   cursor: pointer;
+  color: #a1df95;
+}
+#publishBtn {
+  color: #00b7ff;
 }
 div.ui-datepicker {
   z-index: 100 !important;
 }
 section {
   position: relative;
-  top: 10px;
-  height: 600px;
-  width: 50%;
+  top: 20px;
+  width: 45%;
   min-width: 400px;
+  max-width: 80%;
   margin: 0 auto;
 }
 .todoList {
   position: relative;
   width: 100%;
-  margin-top: 30px;
+  margin-top: 45px;
   height: auto;
+  box-sizing: border-box;
 }
 .new-todo-wrapper {
   position: relative;
   width: 100%;
   height: 45px;
-  background: #dbe1e3;
-  border: 1px solid #c4cbce;
-  border-radius: 3px;
 }
 form {
   width: 100%;
@@ -310,6 +279,8 @@ input.new-input {
   font: 1.2em verdana;
   color: #898989;
   padding-left: 8px;
+  padding-right: 8px;
+  border: 1px solid #dadada;
 }
 .todo-wrapper {
   position: relative;
@@ -317,30 +288,30 @@ input.new-input {
   margin-top: 25px;
   padding: 8px;
   background: #f6f6f6;
-  background: #e8e8e8;
-  border-sizing: border-box;
+  background: #f0f0f0;
+  box-sizing: border-box;
   z-index: 5;
   border: none;
+  cursor: move;
 }
 textarea.entryText,
 textarea.commentText,
 input.deadlineText {
-  background: #fbfbfb;
+  background: #f9f9f9;
   position: relative;
   width: 100%;
   min-height: 28px;
   margin: 0 auto;
-  line-height: 14px;
-  color: #5a9eba;
+  color: #7fbed8;
+  color: #8e8d8d;
   font: 1em arial;
-  padding-left: 5px;
-  padding-right: 5px;
+  padding: 6px 6px 0 6px;
+  border: 1px solid #e3e3e3;
+  box-sizing: border-box;
 }
 textarea.commentText {
   margin-top: 8px;
   color: #8e8d8d;
-  font: 1em Verdana;
-  border-sizing: border-box;
 }
 input.deadlineText {
   height: 20px;
@@ -350,7 +321,7 @@ input.deadlineText {
   color: #8e8d8d;
   padding: 0;
   padding-left: 5px;
-  font: 0.9em Verdana;
+  font: 0.9em;
 }
 .deadlineHelper {
   width: auto;
@@ -370,8 +341,7 @@ input.deadlineText {
   right: 0;
   width: 96px;
   height: 19px;
-  background: #f6f6f6;
-  background: #e8e8e8;
+  background: #f0f0f0;
   display: none;
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
@@ -381,28 +351,32 @@ input.deadlineText {
 .deadlineBtn,
 .deleteBtn {
   position: absolute;
-  top: 4px;
-  width: 15px;
-  height: 15px;
   cursor: pointer;
-  background: #d4827e;
-  border-radius: 15px;
 }
 .statusBtn {
-  right: 69px;
-  background: #9db89f;
+  right: 71px;
+  color: #8ac77f;
+  font-size: 1.6em;
 }
 .commentBtn {
-  right: 48px;
-  background: #7094a3;
+  right: 50px;
+  font-weight: 600;
+  color: #71c2d9;
+  line-height: 1.5em;
+  font-size: 1.4em;
 }
 .deadlineBtn {
-  right: 27px;
-  background: #777fb8;
+  right: 29px;
+  font-weight: 600;
+  color: #7787d6;
+  line-height: 1.5em;
+  font-size: 1.4em;
 }
 .deleteBtn {
-  right: 6px;
-  background: #d4827e;
+  top: 2px;
+  right: 8px;
+  color: #d4827e;
+  font-size: 1.5em;
 }
 input:focus,
 select:focus,
@@ -411,6 +385,25 @@ button:focus {
   outline: none;
   border-color: #c1dde8;
   box-shadow: 0 0 1px #c1dde8;
+}
+.about {
+  position: absolute;
+  right: 0;
+  bottom: 10px;
+  width: 50px;
+  height: 20px;
+  color: #00b7ff;
+  font: 1.2em arial;
+}
+footer {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 170px;
+  height: 50px;
+  background: #f00;
+  margin: 0 auto;
+  color: #7ec172;
 }
 div.ui-datepicker {
   font-size: 10px;
@@ -445,4 +438,14 @@ div.ui-datepicker {
 }
 .ui-timepicker-rtl dl dd {
   margin: 0 65px 10px 10px;
+}
+.button,
+.toolBtn {
+  user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: -moz-none;
+  -ms-user-select: none;
+  user-select: none;
 }

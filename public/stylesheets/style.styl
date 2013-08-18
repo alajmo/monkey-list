@@ -12,13 +12,14 @@ textarea, input
   //line-height 0px
   vertical-align middle
   display block
-  border: 2px solid #dadada;
+
 
 body, html
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif
+  font: 12px "Lucida Grande", Helvetica, Arial, sans-serif
   margin 0
   padding 0
   height 100%
+  min-height 100%
   width 100%
   background white
 
@@ -33,89 +34,64 @@ $minw = 400px
 
 header
   position relative
-  top 0
-  left 0
-  margin 0
+  margin 0 auto
   padding 0
-  width 100%
-  height 42px
-  background #f6f6f6
+  width 50%
+  min-width $minw
+  height 62px
+  //background #f6f6f6
   //background #70c782
   //background-image url(/images/gradient.png)
   border-shadow 1px #7e9eac solid
-  border-bottom 1px solid #cbd7db
+  border-bottom 1px solid #e5e5e5
 
 div.logo
-  position absolute
-  left 0
-  top 8px
-  height 100%
-
-div.logoText
-  position absolute
-  left 30px
-  top 10px
-  height 100%
-  font 1.3em arial
-  line-height 150%
-  color #93989a
-  color #00b6ff
-
-span.logoText2
-  font-weight bold
-  font 1.2em arial
-
-.header2
   position relative
-  margin 0 auto
-  width $w
-  min-width $minw
-  height 100%
+  top 15px
+
+
 
 .btn-wrapper
   position absolute
-  bottom 5px
   right 0
-  height 80%
-  background inherit
+  top 50px
+  height 50%
+  bottom 15px
+  width 210px
 
 .button, .toolBtn
-  width 65px
+  width 30px
   height 100%
   float right
-  margin-left 5px
-  text-align right
-  padding-right 5px
-  vertical-align middle
-  color #ffffff
-  background #00B7FF
-  background #6ec8ea
-  background #77d288
-  background #77b7d2
-  font 500 1em Helvetica
-  line-height 2.5em
+  margin-left 10px
+  //background #7ec172
+  font 1em Helvetica
   border none
   cursor pointer
+  color #a1df95
+
+#publishBtn
+  color #00b7ff
+
 
 // Section
-
 div.ui-datepicker
   z-index 100 !important
 
 section
   position relative
-  top 10px
-  height 600px
-  width $w
+  top 20px
+  width 45%
   min-width $minw
-  //background blue
+  max-width 80%
   margin 0 auto
 
 .todoList
   position relative
   width 100%
-  margin-top 30px
+  margin-top 45px
   height auto
+  box-sizing border-box
 
 $entry-height = 45px
 $entry-padding = 3px;
@@ -129,9 +105,6 @@ $bd = 15px
   position relative
   width 100%
   height $entry-height
-  background #dbe1e3
-  border 1px solid #c4cbce
-  border-radius 3px
 
 form
   width 100%
@@ -139,12 +112,16 @@ form
   //box-sizing border-box
   //padding 5px
 
+
 input.new-input
   width: 100%
   height: 100%
   font 1.2em verdana
   color #898989
   padding-left 8px
+  padding-right 8px
+  border: 1px solid #dadada;
+
 
 
 // EXISTING TODO
@@ -156,28 +133,29 @@ input.new-input
   padding 8px
   //min-height 28px
   background #f6f6f6
-  background #e8e8e8
-  border-sizing border-box
+  background #f0f0f0
+  box-sizing border-box
   z-index 5
   border none
+  cursor move
 
 textarea.entryText, textarea.commentText, input.deadlineText
-  background #fbfbfb
+  background #f9f9f9
   position relative
   width 100%
   min-height 28px
   margin 0 auto
-  line-height 14px
-  color #5a9eba
+  color #7fbed8
+  color #8e8d8d
   font 1em arial
-  padding-left 5px
-  padding-right 5px
+  padding 6px 6px 0 6px
+  border: 1px solid #e3e3e3;
+  box-sizing border-box
+
 
 textarea.commentText
   margin-top 8px
   color #8e8d8d
-  font 1em Verdana
-  border-sizing border-box
 
 input.deadlineText
   height 20px
@@ -187,7 +165,7 @@ input.deadlineText
   color #8e8d8d
   padding 0
   padding-left 5px
-  font 0.9em Verdana
+  font 0.9em
 
 .deadlineHelper
   width auto
@@ -208,36 +186,39 @@ input.deadlineText
   right 0
   width ($bd*4+36px)
   height ($bd + 4px)
-  background #f6f6f6
-  background #e8e8e8
+  background #f0f0f0
   display none
   border-top-left-radius 15px
   border-top-right-radius 15px
 
 .statusBtn, .commentBtn, .deadlineBtn, .deleteBtn
   position absolute
-  top 4px
-  width $bd
-  height $bd
   cursor pointer
-  background #d4827e
-  border-radius 15px
 
 .statusBtn
-  right (3*$bd + 24px)
-  background #9db89f
+  right (3*$bd + 26px)
+  color #8ac77f
+  font-size 1.6 em
 
 .commentBtn
-  right (2*$bd + 18px)
-  background #7094a3
+  right (2*$bd + 20px)
+  font-weight 600
+  color #71c2d9
+  line-height 1.5 em
+  font-size 1.4 em
 
 .deadlineBtn
-  right (1*$bd + 12px)
-  background #777fb8
+  right (1*$bd + 14px)
+  font-weight 600
+  color #7787d6
+  line-height 1.5 em
+  font-size 1.4 em
 
 .deleteBtn
-  right (0*$bd + 6px)
-  background #d4827e
+  top 2px
+  right (0*$bd + 8px)
+  color #d4827e
+  font-size 1.5 em
 
 input:focus,
 select:focus,
@@ -247,6 +228,27 @@ button:focus {
   border-color: #c1dde8;
   box-shadow: 0 0 1px #c1dde8;
 }
+
+// Footer
+
+.about
+  position absolute
+  right 0
+  bottom 10px
+  width 50px
+  height 20px
+  color #00b7ff
+  font 1.2em arial
+
+footer
+  position absolute
+  bottom 0
+  left 50%
+  width 170px
+  height 50px
+  background red
+  margin 0 auto
+  color #7ec172
 
 // Timepicker
 
@@ -263,3 +265,13 @@ div.ui-datepicker
 .ui-timepicker-rtl{ direction: rtl; }
 .ui-timepicker-rtl dl { text-align: right; }
 .ui-timepicker-rtl dl dd { margin: 0 65px 10px 10px; }
+
+
+.button, .toolBtn
+  user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: -moz-none;
+  -ms-user-select: none;
+  user-select: none;

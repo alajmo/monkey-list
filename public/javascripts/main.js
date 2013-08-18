@@ -5,10 +5,10 @@ function appendTodo1(content, lid) {
             "<input type='text' class='deadlineText widget' name='deadline' accept-charset='utf-8'></input>" +
             "<div class='deadlineHelper'></div> " +
             "<div class='tool-box'>" +
-            "<div class='statusBtn'></div>" +
-            "<div class='commentBtn'></div>" +
-            "<div class='deadlineBtn'></div>" +
-            "<div class='deleteBtn'></div>" +
+            "<div class='statusBtn'>&#9744;</div>" +
+            "<div class='commentBtn'>N</div>" +
+            "<div class='deadlineBtn'>T</div>" +
+            "<div class='deleteBtn'>&#10006;</div>" +
             "</div>" +
             "</div>";
     $(entry).appendTo('.todoList');
@@ -17,7 +17,6 @@ function appendTodo1(content, lid) {
     return false;
 }
 ;
-//     var entry = "<div id='' class='todo-wrapper ui-state-default'>" +
 function appendTodo2(lid, tid, order, content) {
     var entry = "<div id=\"" + order + "\" class=\"todo-wrapper " + tid + "\">" +
             "<textarea onchange='updateTodo(\"" + lid + "\", \"" + tid + "\", value, name)' class='entryText' name='content' accept-charset='utf-8'>" + content + "</textarea>" +
@@ -25,10 +24,10 @@ function appendTodo2(lid, tid, order, content) {
             "<input type='text' onchange='updateTodo(" + lid + "," + tid + ", value, name)' class='deadlineText widget' name='deadline' accept-charset='utf-8'></input>" +
             "<div class='deadlineHelper'></div> " +
             "<div class='tool-box'>" +
-            "<div class='statusBtn'></div>" +
-            "<div class='commentBtn'></div>" +
-            "<div class='deadlineBtn'></div>" +
-            "<div class='deleteBtn'></div>" +
+            "<div class='statusBtn'>&#9744;</div>" +
+            "<div class='commentBtn'>N</div>" +
+            "<div class='deadlineBtn'>T</div>" +
+            "<div class='deleteBtn'>&#10006;</div>" +
             "</div>" +
             "</div>";
     $(entry).appendTo('.todoList');
@@ -38,8 +37,6 @@ function appendTodo2(lid, tid, order, content) {
     return false;
 }
 ;
-
-
 
 /*
  * Adjust textarea to expand as person writes
@@ -54,12 +51,16 @@ function scrollable() {
 ;
 
 function setupTodo() {
+    // Remember comments and deadline status
     if ($.cookie("showComments") === "no") {
         $('.commentText').hide();
+        $('#notesBtn').css("color", "#9abb94");
     }
+
     if ($.cookie("showDeadlines") === "no") {
         $('.deadlineText').hide();
         $('.deadlineHelper').hide();
+        $('#timeBtn').css("color", "#9abb94");
     }
 
     $(".deadlineText").datetimepicker({showAnim: "fadeIn"});
@@ -73,6 +74,12 @@ function setupTodo() {
         }});
     $(".statusBtn").off("click").on("click", function() {
         $(this).closest('.todo-wrapper').find('.entryText').toggleClass('todoFinished');
+        if ($(this).html() == decodeEntities("&#9744;")) {
+            $(this).html("&#9745;");
+        }
+        else {
+            $(this).html("&#9744;");
+        }
     });
     $(".commentBtn").off("click").on("click", function() {
         $(this).closest('.todo-wrapper').find('.commentText').toggle();
@@ -102,27 +109,26 @@ function createTodo(lid, tid, order, content) {
             appendTodo2(lid, tid, order, content);
         },
         error: function(jqXHR, textstatus, errorThrown) {
-            alert('text status ' + textstatus + ', err ' + errorThrown);
+            //alert('text status ' + textstatus + ', err ' + errorThrown);
         }
     });
 
 }
 ;
 
-function updateOrder(lid, tids, old_position, new_position) {
+function updateOrder(lid, tids, new_position) {
     $.ajax({
         type: "POST",
         url: '/sort/',
         data: {
             lid: lid,
             tids: tids,
-            old_position: old_position,
             new_position: new_position
         },
         success: function() {
         },
         error: function(jqXHR, textstatus, errorThrown) {
-            alert('text status ' + textstatus + ', err ' + errorThrown);
+           //alert('text status ' + textstatus + ', err ' + errorThrown);
         }
     });
 }
@@ -140,7 +146,7 @@ function updateTodo(lid, tid, value, typeUpdate) {
         success: function(data) {
         },
         error: function(jqXHR, textstatus, errorThrown) {
-            alert('text status ' + textstatus + ', err ' + errorThrown);
+            //alert('text status ' + textstatus + ', err ' + errorThrown);
         }
     });
 }
@@ -156,10 +162,9 @@ function updateStatus(lid, tid, status) {
             status: status
         },
         success: function() {
-            //$('#' + tid).toggleClass('todoFinished');
         },
         error: function(jqXHR, textstatus, errorThrown) {
-            alert('text status ' + textstatus + ', err ' + errorThrown);
+            //alert('text status ' + textstatus + ', err ' + errorThrown);
         }
     });
 
@@ -177,7 +182,7 @@ function deleteTodo(lid, tid) {
             $('.' + tid).parent().remove();
         },
         error: function(jqXHR, textstatus, errorThrown) {
-            alert('text status ' + textstatus + ', err ' + errorThrown);
+            //alert('text status ' + textstatus + ', err ' + errorThrown);
         }
     });
 
@@ -186,10 +191,12 @@ function deleteTodo(lid, tid) {
 
 function showComments() {
     if ($.cookie("showComments") === "yes") {
+        $('#notesBtn').css("color", "#9abb94");
         $('.commentText').hide();
         $.cookie("showComments", "no");
     }
     else {
+        $('#notesBtn').css("color", "#a1df95");
         $('.commentText').show();
         $.cookie("showComments", "yes");
     }
@@ -198,11 +205,13 @@ function showComments() {
 
 function showDeadlines() {
     if ($.cookie("showDeadlines") === "yes") {
+        $('#timeBtn').css("color", "#9abb94");
         $('.deadlineText').hide();
         $('.deadlineHelper').hide();
         $.cookie("showDeadlines", "no");
     }
     else {
+        $('#timeBtn').css("color", "#a1df95");
         $('.deadlineText').show();
         $('.deadlineHelper').show();
         $.cookie("showDeadlines", "yes");
@@ -227,3 +236,22 @@ $.fn.serializeObject = function()
     });
     return o;
 };
+
+
+
+var decodeEntities = (function() {
+    // this prevents any overhead from creating the object each time
+    var element = document.createElement('div');
+    function decodeHTMLEntities(str) {
+        if (str && typeof str === 'string') {
+            // strip script/html tags
+            str = str.replace(/<script[^>]*>([\S\s]*?)<\/script>/gmi, '');
+            str = str.replace(/<\/?\w(?:[^"'>]|"[^"]*"|'[^']*')*>/gmi, '');
+            element.innerHTML = str;
+            str = element.textContent;
+            element.textContent = '';
+        }
+        return str;
+    }
+    return decodeHTMLEntities;
+})();

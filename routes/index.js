@@ -68,14 +68,9 @@ exports.status = function(req, res) {
 };
 
 exports.sort = function(req, res) {
-    var old_position = req.body.old_position;
     var new_position = req.body.new_position;
     var tids = req.body.tids;
-    var t = [];
-    for (var i = 0; i < tids.length; i++) {
-        t[tids[i]] = new_position[i];
-    }
-    for (pos in old_position) {
+    for (pos in new_position) {
         List.update({_id: req.body.lid, todos: {$elemMatch: {_id: tids[pos]}}}, {$set: {"todos.$.order": pos}}, function(err, tlist) {
         });
     }
