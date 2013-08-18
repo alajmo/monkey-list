@@ -10,7 +10,9 @@ var express = require('express')
 /**
  *  Creates the server and connect to mongodb
  */
-var uristring = "mongodb://localhost/monkey-list";
+var uristring = process.env.MONGOLAB_URI ||
+  process.env.MONGOHQ_URL ||
+  'mongodb://localhost/monkey-db';
 
 var theport = process.env.PORT || 5000;
 var database = null;
