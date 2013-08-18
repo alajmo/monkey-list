@@ -18,14 +18,6 @@ var app = express();
 //mongoose.connect('mongodb://localhost/monkey-list');
 
 mongoose.connect(uristring, function(err, db) {
-    console.log("connected, db: " + db);
-
-    database = db;
-
-    database.addListener("error", function(error) {
-        console.log("Error connecting to MongoLab");
-
-    });
 });
 
 /**
