@@ -3,7 +3,7 @@ module.exports = function(app, express, path) {
         app.set('port', process.env.PORT || 5000);
         app.set('views', path.join(__dirname, '../views'));
         app.set('view engine', 'jade');
-        app.use(express.favicon(path.join(__dirname, '/public/images/favicon.ico')));
+        app.use(express.favicon(path.join(__dirname, '../public/images/favicon.ico')));
         //app.use(express.logger('dev'));
         app.use(express.bodyParser());
         app.use(express.methodOverride());
