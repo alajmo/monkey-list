@@ -107,9 +107,6 @@ exports.save = function(req, res) {
 };
 
 exports.saved = function(req, res) {
-//    var lid = hashids.decrypt(req.params.lid);
-//    var ses = 5;
-//    console.log(req.params.lid);
 
     List.findOne({'_id': req.params.lid}, function(err, tlist) {
         res.render('saved', {
