@@ -10,8 +10,23 @@ var express = require('express')
 /**
  *  Creates the server and connect to mongodb
  */
+var uristring = 
+  process.env.MONGOLAB_URI || 
+  process.env.MONGOHQ_URL || 
+  'mongodb://localhost/HelloMongoose';
+
+var theport = process.env.PORT || 5000;
+
 var app = express();
-mongoose.connect('mongodb://localhost/monkey-list');
+//mongoose.connect('mongodb://localhost/monkey-list');
+
+mongoose.connect(uristring, function (err, res) {
+  if (err) { 
+    console.log ('ERROR connecting to: ' + uristring + '. ' + err);
+  } else {
+    console.log ('Succeeded connected to: ' + uristring);
+  }
+});
 
 /**
  * Sets the environment
