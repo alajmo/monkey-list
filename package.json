@@ -3,12 +3,16 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node app.js"
+    "start": "node app"
   },
   "dependencies": {
     "express": "3.3.2",
     "jade": "*",
     "stylus": "*",
     "mongoose": "*"
+  },
+      "engines": {
+  "node": "0.10.12",
+  "npm": "1.2.32"
   }
 }
